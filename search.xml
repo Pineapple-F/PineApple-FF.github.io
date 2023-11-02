@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>基于logisim的mips单周期处理器设计</title>
+      <link href="/2023/11/02/hello-world/"/>
+      <url>/2023/11/02/hello-world/</url>
+      
+        <content type="html"><![CDATA[<h1 id="基于logisim的mips单周期处理器设计"><a href="#基于logisim的mips单周期处理器设计" class="headerlink" title="基于logisim的mips单周期处理器设计"></a>基于logisim的mips单周期处理器设计</h1><h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><h4 id="一、CPU功能"><a href="#一、CPU功能" class="headerlink" title="一、CPU功能"></a>一、CPU功能</h4><p>cpu功能即为控制指令执行，包含对指令的四种操作：</p><ul><li>取数:从主存中取出数据并送至某个寄存器中</li><li>存数：将某个寄存器中的值存入主存</li><li>传送：将某个寄存器中的数据传送至ALU或另一个寄存器</li><li>运算：ALU进行运算，结果保存至某个寄存器中</li></ul><p>cpu设计一般思路：</p><ol><li>分析指令系统需求</li><li>分类型依次构建数据通路（R型，I型，J型）</li><li>设计控制器  </li><li>合并完成</li></ol><hr><h4 id="二、单周期cpu设计"><a href="#二、单周期cpu设计" class="headerlink" title="二、单周期cpu设计"></a>二、单周期cpu设计</h4><p><strong>1. 本次设计需支持的指令：</strong></p><ul><li>R型：<br>add, sub</li><li>I型：<br> ori, lw, sw, lui, beq,</li><li>空指令：<br>nop<hr></li></ul><p><strong>2. 模块需求：</strong></p><ul><li>IFU（取指令单元）包含：<ul><li>PC（程序计数器）：寄存器实现，起始地址：0x00003000。</li><li>IM（指令存储器）：ROM实现，12位地址，32位位宽，内部起始地址从零开始</li></ul></li><li>GRF（寄存器堆）包含：<ul><li>32个32位寄存器</li></ul></li><li>ALU（算术逻辑单元）：<ul><li>进行各种运算</li></ul></li><li>DM（数据存储器）：<ul><li>RAM实现：32位位宽</li></ul></li><li>Controller（控制器）：<ul><li>输入指令的OP（指令前六位）以及Func（R型指令后六位）</li><li>输出各个其他的模块的使能信号</li></ul></li></ul><hr><p><strong>3. 模块设计：</strong></p><ul><li><p><strong>IFU:</strong></p><img src="cpuimage/IFU.png" alt="IFU" style="zoom: 60%;" />功能描述：<ul><li>PC每次右移两位后使用Bit Extender变为12位从IM(ROM)中取出指令</li><li>取指令：instr &#x3D; IM[PC]</li><li>PC每次取指令完成后自增：PC &lt;&#x3D; PC + 4</li></ul></li><li><p><strong>GRF:</strong></p><ul><li>在P0课下的GRF上稍作调整，外观及引脚调整为<img src="cpuimage/GRF1.png" alt="IFU" style="zoom:50%;" /></li><li>GRF内部基本由三部分组成：</li></ul><ol><li>通过Rs,Rt地址利用多路选择器找到对应寄存器并输出其中存的数据R1,R2<img src="cpuimage/GRF2.png" alt="IFU" style="zoom: 33%;" /></li><li>通过RegAddr利用解码器找到需要修改的寄存器<img src="cpuimage/GRF3.png" alt="IFU" style="zoom: 33%;" /></li><li>通过各个使能信号决定是否修改RegAddr对应的寄存器的值（并将32个标签与对应寄存器相连）<img src="image-4.png" alt="Alt text" style="zoom: 40%;" /></li></ol></li><li><p><strong>ALU:</strong></p><ul><li>根据本次设计需支持的8个指令，进行ALU各分支设计：<ul><li>add, lw, sw : 加法</li><li>sub : 减法</li><li>ori : 或运算</li><li>lui : 移位</li><li>beq : 判断Rs与Rt是否相等</li></ul></li><li>设计图如下：<img src="image.png" alt="Alt text" style="zoom: 40%;" /></li><li>通过Controller确定的ALUOp决定输出分支</li></ul></li><li><p><strong>Controller:</strong><br>controller 由两部分组成：</p><ol><li>通过Op确定是哪条指令，并连接对应标签（其中R型指令Op相同，需根据Func进一步判断） <img src="image-3.png" alt="Alt text" style="zoom: 50%;" /> 该部分我没有采用P3教程中的方法，而是利用Comparater直接将Op与常量比较看属于哪条指令</li><li>通过各指令的数据通路，决定Controller的输出使能信号的高低电平<br> 本次设计的Controller一共有8个输出使能信号，分别是： <img src="image-5.png" alt="Alt text" style="zoom: 50%;" /></li></ol><ul><li>branch : beq 时置1，其余均置0</li><li>MemtoReg : 选择 ALU运算结果或从DM中读出数据 存至GRF</li><li>MemWrite : DM读数据（lw）</li><li>MemRead : DM写数据（sw）</li><li>ALUOp : 决定ALU模块输出的分支</li><li>ALUSrc : 决定ALU输入是 Rt 对应数据还是 imm 立即数（R型指令置1，I型指令置1）</li><li>RegWrite : 是否改变GRF中寄存器的值</li><li>RegDst : 选择进入GRF的RegAddr是 Rt 还是 Rd（R型指令有Rd，I型指令无Rd）<img src="image-7.png" alt="Alt text" style="zoom:40%;" /></li></ul></li><li><p><strong>DM:</strong></p><ul><li>RAM实现，具有读写功能  <img src="image-8.png" alt="Alt text" style="zoom:50%;" />    **4. 数据通路：**将上述各模块相连，并将各个指令依次构建数据通路，详见PPT</li></ul></li></ul><hr><p>​<strong>5. 数据通路合并，设计完成：</strong></p><p><img src="/image-6.png" alt="Alt text"></p><hr><h2 id="思考题："><a href="#思考题：" class="headerlink" title="思考题："></a>思考题：</h2><p>  <strong>1. 上面我们介绍了通过 FSM 理解单周期 CPU 的基本方法。请大家指出单周期 CPU 所用到的模块中，哪些发挥状态存储功能，哪些发挥状态转移功能。</strong><br>   答：状态存储功能模块：GRF、DM；状态转移功能模块：IFU、ALU、Controller<br>  <strong>2. 现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用 Register，这种做法合理吗？ 请给出分析，若有改进意见也请一并给出。</strong><br>   答：合理<br>   IM 使用 ROM：IM 存储指令代码和常量数据，ROM 能够提供非易失性存储和快速的读取速度，因此适合用于存储指令和常量数据但是，如果需要修改指令或者增加新的指令，需要重新烧录或更换 ROM 芯片，不够灵活。<br>   DM 使用 RAM：DM 存储程序运行时的数据，RAM 提供了易写易读的特性，适合作为数据存储器。但是，RAM 是易失性存储，断电后数据会丢失。此外，RAM 的速度相对较慢，访问时间比寄存器长。改进的方法可以考虑使用带备份电池的非易失性存储器，比如 SRAM 或者 FRAM，能够保留数据并提供较快的访问速度。<br>   GRF 使用 Register：GRF 存储寄存器的值，这些寄存器直接用于 CPU 运算操作。寄存器提供了最快的访问速度和多端口的并行读写能力。<br>  <strong>3. 在上述提示的模块之外，你是否在实际实现时设计了其他的模块？如果是的话，请给出介绍和设计的思路。</strong><br>  答：暂时没有设计其他的模块<br>  <strong>4. 事实上，实现 nop 空指令，我们并不需要将它加入控制信号真值表，为什么？</strong><br>  答：nop在CPU运行周期内不做任何行为，因此将所有控制信号置低电平即可确保CPU的各个部件不受任何影响，相当于执行了一个没有行为的周期，也即执行了nop空指令。<br>  <strong>5. 阅读 Pre 的 “MIPS 指令集及汇编语言” 一节中给出的测试样例，评价其强度（可从各个指令的覆盖情况，单一指令各种行为的覆盖情况等方面分析），并指出具体的不足之处。</strong><br>  <img src="image-9.png" alt="Alt text" style="zoom:50%;" /><br>  答： 该测试指令强度较弱<br>   1.同一种指令位置过于集中，应该将不同指令穿插运行<br>   2.从单一指令的覆盖情况来看，指令行为比较一致，同时也没有进行不同类型数据的测试以及边缘数据的测试。<br>   3.同时指令总数较少，不一定可以反应出cpu的问题所在</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的第一篇博客</title>
+      <link href="/2023/11/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+      <url>/2023/11/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
