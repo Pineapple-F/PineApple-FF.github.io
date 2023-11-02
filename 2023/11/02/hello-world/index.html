@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>基于logisim的mips单周期处理器设计 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基于logisim的mips单周期处理器设计设计思路一、CPU功能cpu功能即为控制指令执行，包含对指令的四种操作：  取数:从主存中取出数据并送至某个寄存器中 存数：将某个寄存器中的值存入主存 传送：将某个寄存器中的数据传送至ALU或另一个寄存器 运算：ALU进行运算，结果保存至某个寄存器中  cpu设计一般思路：  分析指令系统需求 分类型依次构建数据通路（R型，I型，J型） 设计控制器">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>基于logisim的mips单周期处理器设计 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="基于logisim的mips单周期处理器设计设计思路一、CPU功能cpu功能即为控制指令执行，包含对指令的四种操作：  取数:从主存中取出数据并送至某个寄存器中 存数：将某个寄存器中的值存入主存 传送：将某个寄存器中的数据传送至ALU或另一个寄存器 运算：ALU进行运算，结果保存至某个寄存器中  cpu设计一般思路：  分析指令系统需求 分类型依次构建数据通路（R型，I型，J型） 设计控制器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于logisim的mips单周期处理器设计">
 <meta property="og:url" content="http://example.com/2023/11/02/hello-world/index.html">
@@ -129,7 +129,7 @@
       win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
         }
       }
       const t = saveToLocal.get('theme')
