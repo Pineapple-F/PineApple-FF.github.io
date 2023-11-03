@@ -187,6 +187,18 @@ template {
   }
 }
 
+/* 鼠标图标 */
+body {
+  background: rgb(243, 175, 4);
+  cursor: url(https://cdn.jsdelivr.net/gh/lete114/CDN@1.0/Use/Jkll8I.png), auto;
+  margin: 0;
+}
+a:hover{
+  text-decoration: none;
+  cursor: url(https://cdn.jsdelivr.net/gh/lete114/CDN@1.0/Use/JkuClT.png), auto;
+}
+
+
 .limit-one-line,
 #article-container .flink .flink-item-name,
 #article-container .flink .flink-item-desc,
