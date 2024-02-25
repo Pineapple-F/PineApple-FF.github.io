@@ -1,0 +1,18 @@
+class:
+  class_name: 友情链接
+  link_list:
+    1:
+      name: JewB
+      link: https://galaxy-jewxw.github.io/
+      avatar: https://galaxy-jewxw.github.io/img/favicon.ico
+      descr: JewB! JewB!
+    2:
+      name: YangYang
+      link: https://buaa-yangyang.github.io/
+      avatar: https://buaa-yangyang.github.io/img/favicon.ico
+      descr:
+    3:
+      name: lyku
+      link: https://blog.lkyu.cf/
+      avatar: https://blog.lkyu.cf/img/favicon.ico
+      descr:
