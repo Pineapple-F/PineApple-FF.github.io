@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>OS预习</title>
+      <link href="/2024/02/25/OS%E9%A2%84%E4%B9%A0/"/>
+      <url>/2024/02/25/OS%E9%A2%84%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h1><h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><ul><li><p><strong>cd</strong></p><p>用法：<code>cd 目录</code></p><p>作用：切换到该目录（类似于打开文件夹）</p><p><code>cd /</code>：&#x2F; 代表根目录，即Linux文件系统的最顶层<br><code>cd ~</code>：~当前用户主目录，对于一般用户，主目录是<code>/home/用户名</code>；如果当前用户是系统管理员(root)用户，主目录是<code>/root</code><br><code>cd /etc/test</code>：切换到<code>etc</code>目录下的<code>test</code>目录（可以理解为打开<code>test</code>文件夹）</p><p><code>cd test</code>：cd命令支持相对路径，如果系统在<code>etc</code>目录，可以输入<code>cd test</code>直接访问<code>test</code>目录</p><p><code>cd .</code>：<code>.</code>表示当前目录<br><code>cd ..</code>：<code>..</code>表示上一级目录<br><code>cd -</code>：<code>-</code>表示上一次访问的目录</p></li><li><p><strong>ls</strong></p><p>用法：<code>ls [选项] [目录]</code> （<code>[]</code>代表可有可无）</p><p>作用：列出目录中的文件</p><p>常用选项：</p><p>​<code>-a</code>：显示隐藏的文件（文件名以 <code>.</code> 开头的文件）</p><p>​<code>-l</code>：每行只列出一个文件</p></li><li><p><strong>mkdir</strong></p><p>用法：<code>mkdir 目录</code></p><p>作用：创建一个新目录</p></li><li><p><strong>pwd</strong></p><p>用法：<code>pwd [选项]</code></p><p>作用：输出当前目录的绝对路径</p></li><li><p><strong>rmdir</strong></p><p>用法：<code>rmdir [选项] 目录</code></p><p>作用：删除一个空的目录。注意：只能是空目录</p></li></ul><h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><p>文件操作的对象是几乎所有文件，也包含目录</p><ul><li><p><strong>touch</strong></p><p>用法：<code>touch [选项] 文件名</code></p><p>作用：当文件不存在时创建新文件，当文件存在时更新文件的时间戳</p><p>注意：不能用<code>touch</code>新建目录，要使用<code>mkdir</code></p></li><li><p><strong>rm</strong></p><p>用法：<code>rm [选项] 文件</code></p><p>作用：删除文件</p><p>常用选项：</p><p>​<code>-r</code>：递归删除目录及其内容，删除非空目录必须有此选项，否则无法删除</p><p>​<code>-f</code>： 强制删除，不提示用户确认，忽略不存在的目录</p><p>​<code>-i</code>： 逐一提示用户确认每个将要被删除的文件</p><p>注意：<code>rm -rf</code>一定慎用，全删了，非必要不使用</p></li><li><p><strong>cp</strong></p><p>用法：<code>cp [选项] 源文件 目标路径</code></p><p>作用：将源文件（或目录）复制到目标路径对应的文件或目录</p><p>常用选项：</p><p>​<code>-r</code>：递归移动目录及其子目录内的所有内容</p></li><li><p><strong>mv</strong></p><p>用法：<code>mv [选项] 源文件 目标路径</code></p><p>作用：类似于剪切，将源文件移动至目标位置</p><p>常用选项：</p><p>​<code>-r</code>：递归移动目录及其子目录内的所有内容</p></li><li><p><strong>diff</strong></p><p>用法：</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> -OS -Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> -OS -Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>单片机——蓝桥杯备赛</title>
       <link href="/2024/02/23/%E5%8D%95%E7%89%87%E6%9C%BA%E2%80%94%E2%80%94%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%87%E8%B5%9B/"/>
       <url>/2024/02/23/%E5%8D%95%E7%89%87%E6%9C%BA%E2%80%94%E2%80%94%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%87%E8%B5%9B/</url>
