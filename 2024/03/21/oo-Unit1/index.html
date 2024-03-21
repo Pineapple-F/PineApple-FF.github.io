@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="ch" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OO第一单元总结 | Pineapple-F's blog</title><meta name="author" content="Pineapple-F"><meta name="copyright" content="Pineapple-F"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="前言在三周的磕磕绊绊中，也算是顺利完成了oo第一单元的三次作业。面对久仰大名的oo，虽说的确很累，但也收获良多。 第一次作业题目描述读入一个包含加、减、乘、乘方以及括号（其中括号的深度至多为 1 层）的单变量表达式，输出恒等变形展开所有括号后的表达式。 需求如下：  处理括号 处理指数 计算加，减，乘 化简合并得到结果  基本思路对于输入的一个表达式，我主要分为两步进行处理： 第一步：解析表达式，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OO第一单元总结">
+<meta property="og:url" content="http://example.com/2024/03/21/oo-Unit1/index.html">
+<meta property="og:site_name" content="Pineapple-F&#39;s blog">
+<meta property="og:description" content="前言在三周的磕磕绊绊中，也算是顺利完成了oo第一单元的三次作业。面对久仰大名的oo，虽说的确很累，但也收获良多。 第一次作业题目描述读入一个包含加、减、乘、乘方以及括号（其中括号的深度至多为 1 层）的单变量表达式，输出恒等变形展开所有括号后的表达式。 需求如下：  处理括号 处理指数 计算加，减，乘 化简合并得到结果  基本思路对于输入的一个表达式，我主要分为两步进行处理： 第一步：解析表达式，">
+<meta property="og:locale">
+<meta property="og:image" content="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780">
+<meta property="article:published_time" content="2024-03-21T11:46:39.000Z">
+<meta property="article:modified_time" content="2024-03-21T15:09:41.202Z">
+<meta property="article:author" content="Pineapple-F">
+<meta property="article:tag" content="总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780"><link rel="shortcut icon" href="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780"><link rel="canonical" href="http://example.com/2024/03/21/oo-Unit1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OO第一单元总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-21 23:09:41'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.zcool.cn/community/01d00a622aee5811013e8953faed22.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Pineapple-F's blog"><span class="site-name">Pineapple-F's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">OO第一单元总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-21T11:46:39.000Z" title="Created 2024-03-21 19:46:39">2024-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-21T15:09:41.202Z" title="Updated 2024-03-21 23:09:41">2024-03-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/oo/">oo</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="OO第一单元总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在三周的磕磕绊绊中，也算是顺利完成了oo第一单元的三次作业。面对久仰大名的oo，虽说的确很累，但也收获良多。</p>
+<h2 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>读入一个包含加、减、乘、乘方以及括号（其中括号的深度<strong>至多为 1 层</strong>）的<strong>单变量</strong>表达式，输出<strong>恒等变形展开所有括号后</strong>的表达式。</p>
+<p>需求如下：</p>
+<ol>
+<li>处理括号</li>
+<li>处理指数</li>
+<li>计算加，减，乘</li>
+<li>化简合并得到结果</li>
+</ol>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>对于输入的一个表达式，我主要分为两步进行处理：</p>
+<p>第一步：<strong>解析</strong>表达式，得到后缀表达式</p>
+<p>第二步：<strong>计算</strong>后缀表达式，得到结果</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><ol>
+<li><p>首先我对输入的表达式进行了一波<strong>预处理</strong>，主要就干了两件事：去空格，连续的加减号变成一个符号</p>
+</li>
+<li><p>然后，开始解析表达式，我在课程组在training中提供的<strong>递归下降</strong>算法的代码基础上，根据题目要求做了稍微修改，得到后缀表达式（不得不说，课程组给的代码真是救大命）</p>
+<p>这里要提一句，由于第一次作业经验不足，我将<strong>指数</strong>在解析表达式阶段处理，也就是解析时读到一个^，就将前面的式子乘对应指数遍，比如我读到<code>(x+1)^3</code>，我就会处理成<code>(x+1)*(x+1)*(x+1)</code>，一个^还好，一旦指数嵌套，由于我存的时候没有化简合并，就会有爆时间和爆内存的风险，也是导致了我在第二次作业强测的第二个点挂掉。所以指数处理还是要在第三步计算时实现。</p>
+</li>
+<li><p>现在我们要对上一步得到的后缀表达式进行<strong>计算</strong>来得到最终结果。本次作业主要自己写的也就是这一部分。具体实现方式是我新建了一个Calculate类用于实现计算操作。</p>
+<p>我们可以发现最终得到的结果是一个多项式，而其中每一个单项式都是<code>系数*x^指数</code>的形式（要注意输出时判断一下系数和指数的值看能否省略或化简），那么由于底数都是x，我们就可以用一个<code>HashMap&lt;Integer,BigInteger&gt;</code>来存储多项式，即<code>HashMap&lt;指数，系数&gt;</code>。比如<code>3*x^2+4*x^5</code>我们就可以存成<code>HashMap&lt;(2,3),(5,4)&gt;</code>同时由于指数作为<code>key</code>，我们也可以更容易的实现同类项的合并。</p>
+<p>之后，由于我们是对后缀表达式做处理，所以可以用<code>ArrayList</code>来代表一个<strong>栈</strong>，里面存储多项式.这样在后缀表达式中读到数字或者x，我们就将其存入栈中；读到符号就取栈顶的两个多项式进行对应的加、减、乘的计算得到结果再存入栈中，当处理完后缀表达式后，栈中只剩下一个多项式，就是最终的结果了。</p>
+</li>
+</ol>
+<h3 id="优化方式"><a href="#优化方式" class="headerlink" title="优化方式"></a>优化方式</h3><p>由于第一次作业相对比较简单，所以优化方式也不多，在进行同类项的合并之后只需要注意一下将多项式中的首个负项放在最前面即可</p>
+<h3 id="Bug分析"><a href="#Bug分析" class="headerlink" title="Bug分析"></a>Bug分析</h3><p>本次作业强测以及互测都没有出现bug，同时在互测中也没有测出别人的bug（满心期待的把别人代码丢到我的评测机里跑，跑了半天也什么bug都没有）</p>
+<p>在本次作业中我也是第一次搭建评测机完成自动化测试，我在往届学长的评测机代码的基础上进行了稍微修改也搞出了一个自己的评测机，还算成就感满满。</p>
+<h2 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h2><p>第二次作业我认为是三次作业中最困难的一次，新增功能不少，同时处理指数函数对于刚刚入门oo的我也有不小的难度</p>
+<h3 id="新增需求"><a href="#新增需求" class="headerlink" title="新增需求"></a>新增需求</h3><ol>
+<li>支持处理嵌套多层括号</li>
+<li>新增指数函数因子：<code>exp(因子)^指数</code></li>
+<li>新增自定义函数因子</li>
+</ol>
+<h3 id="基本思路-1"><a href="#基本思路-1" class="headerlink" title="基本思路"></a>基本思路</h3><p>整体流程和第一次作业一样，还是先解析得到后缀表达式，再计算后缀表达式并化简合并输出最终结果。</p>
+<ol>
+<li>对于处理嵌套<strong>多层括号</strong>：在第一次作业中的递归下降算法便足以解决这个问题，无需新增代码</li>
+<li>对于<strong>自定义函数</strong>：我在预处理阶段从字符串层面对于自定义函数进行替换</li>
+<li>对于<strong>指数函数因子</strong>：对calculate类进行重构，改变数据结构来存储新的多项式，同时改变加，减，乘的方法。</li>
+</ol>
+<h3 id="具体实现-1"><a href="#具体实现-1" class="headerlink" title="具体实现"></a>具体实现</h3><ol>
+<li><p><strong>自定义函数</strong>处理：我新建了一个<code>SelfDefineFun</code>类用于存放输入的自定义函数。随后在表达式预处理中，我遍历表达式，如果读到f, g, h那么就将找到完整的函数交给<code>SelfDefineFun</code>类处理，并利用在自定义函数类中写的<code>toString</code>方法得到处理之后的字符串。</p>
+<p>这里要注意两个点：</p>
+<p>第一个点是要注意嵌套自定义函数的情况，使用递归处理即可</p>
+<p>第二个点是注意替换x的时候不要把exp中的x也换掉</p>
+</li>
+<li><p><strong>解析</strong>表达式修改：由于本次新增指数函数，所以就在递归下降中加入<code>parseExp</code>方法，位置和解析括号位置相同。</p>
+<p>此外，我对于<code>exp()</code>后面可能存在的指数的处理方法是将指数乘进括号内，比如<code>exp(x)^2</code>就处理成<code>exp(x*2)</code>，这样就可以使我在最终输出前所有的<code>exp()</code>都没有指数，方便我对<code>exp()</code>从字符串层面进行同类项合并</p>
+</li>
+<li><p>重构<strong>计算</strong>类：这个可真是下了大功夫，也是写了很多面对过程编程的代码，本来打算重构的，但是第三次作业刚好用到了一部分，也就没有全改掉</p>
+<p>和上次一样，我发现最后的多项式由相同形式的单项式组成，每个单项式都是<code>系数*x^指数*exp((多项式))</code>，于是我用<code>TreeMap&lt;String, Integer&gt;</code>来存储单项式，<code>TreeMap&lt;TreeMap&lt;String, Integer&gt;, BigInteger&gt;</code>来存储多项式，再和上次一样用一个<code>ArrayList</code>来作为计算的栈存放多项式。</p>
+<p>具体计算就是和上一次作业大致类似，就是需要重新写加、减、乘方法来实现对指数函数的计算与合并</p>
+</li>
+<li><p><strong>输出</strong>：我的<strong>优化</strong>均在输出时实现，也就是在输出时判断指数和系数的值看是否需要输出，以及对exp()内的情况进行判断来确定输出方式</p>
+</li>
+</ol>
+<h3 id="优化方式-1"><a href="#优化方式-1" class="headerlink" title="优化方式"></a>优化方式</h3><p>本次优化还是有很多方面需要考虑的，我做了如下实现：</p>
+<ol>
+<li>第一个负项提到最前面</li>
+<li>对于exp内部相同的进行合并</li>
+<li><code>exp((因子))</code> -&gt; <code>exp(因子)</code></li>
+<li><code>exp((系数*因子))</code>  -&gt; <code>exp(因子)^系数</code></li>
+</ol>
+<p>除了我做的这些优化之外，还有人做到了将exp()内的公因式提取到括号外，以及将一个exp()拆成两个exp()相乘。由于考虑到正确性优先以及实现其他优化对代码改动较多，我没有继续优化。</p>
+<h3 id="Bug分析-1"><a href="#Bug分析-1" class="headerlink" title="Bug分析"></a>Bug分析</h3><p>很不幸，我的本次作业在强测中挂掉两个点：</p>
+<p>第一个点是因为处理指数函数的方式错误导致面对<code>(((((((((((x^8)^8)^8)^8)^8)^8)^8)^8)^8)^8)^8)^8</code>这样的数据时出现了<code>MEMORY_LIMIT_EXCEED</code>错误。</p>
+<p>第二个点是由于在优化时我将exp()内的系数提到括号外，但由于我之前所有的exp()都是不带指数的，所以我之前对<code>exp(因子)</code>都是直接采取<code>subString(4, exp.length() - 1)</code>的方法获取exp()内的因子，这也导致了优化后出现指数时获取因子错误。</p>
+<p>在互测中被hack的点和强测的第二个点错误方式一样。</p>
+<p>但同时，我在互测中也成功hack到别人三个错误：</p>
+<ol>
+<li>由于优化时去掉括号错误导致出现<code>exp(-x)</code></li>
+<li>提取公因式时将负数提出到指数位置</li>
+<li>处理自定义函数时在读入其中exp()内的因子出现错误</li>
+</ol>
+<p>前两个点均是通过自己捏数据来hack到的，第三个错误是利用我的评测机跑出来的，自己的评测机第一次在互测中发挥作用，感觉很不错。</p>
+<h2 id="第三次作业"><a href="#第三次作业" class="headerlink" title="第三次作业"></a>第三次作业</h2><p>第三次作业确实挺简单的，抱着死磕两三天的心态开始第三次作业，结果一个晚上搞完了。虽说轻松却没有了第二次作业的激情，让这周像过博客周一样。</p>
+<h3 id="新增需求-1"><a href="#新增需求-1" class="headerlink" title="新增需求"></a>新增需求</h3><ol>
+<li>自定义函数定义时可以出现之前定义过的<strong>其他自定义函数</strong></li>
+<li>新增<strong>求导因子</strong></li>
+</ol>
+<h3 id="基本思路-2"><a href="#基本思路-2" class="headerlink" title="基本思路"></a>基本思路</h3><ol>
+<li>对于自定义函数的改变很简单，就是在替换的时候再调用一下就好</li>
+<li>求导因子我是通过化简后对需要求导的多项式的<strong>每个单项式分别进行求导</strong>处理，因为单项式有通项形式，所以实现较为容易</li>
+</ol>
+<h3 id="具体实现-2"><a href="#具体实现-2" class="headerlink" title="具体实现"></a>具体实现</h3><p>这里就说说对求导的处理吧</p>
+<ol>
+<li><p>解析阶段：和exp()一样，我把dx()当做整体存进后缀表达式中，同时dx()里面也是后缀表达式形式</p>
+</li>
+<li><p>计算阶段：求导无非就是对一个表达式也就是一个多项式求导，那么多项式求导就是其中的每个单项式分别求导再相加。</p>
+<p>我们知道单项式的通项形式为<code>系数*x^指数*exp((多项式))</code>，那么这个东西求导就是前导后不导加后导前不导，也就是<code>dx(系数*x^指数*exp((多项式)))</code>等于<code>系数*dx(x^指数)*exp((多项式)) + 系数*x^指数*dx(exp((多项式)))  </code>而对于幂函数和指数函数求导又有各自的法则，就很容易处理了。</p>
+</li>
+</ol>
+<h3 id="优化方式-2"><a href="#优化方式-2" class="headerlink" title="优化方式"></a>优化方式</h3><p>由于第三次作业和第二次的输出形式可以说是一模一样，我在第二次的优化方案上并没有新增其他优化</p>
+<h3 id="Bug分析-2"><a href="#Bug分析-2" class="headerlink" title="Bug分析"></a>Bug分析</h3><p>和第一周一样，我在强测和互测中均没有出现错误，同时互测房内也都没有出现bug</p>
+<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>​	持续三周的第一单元这么快就过去了，现在想想，前两周冥思苦想无从下手的样子仿佛还在眼前。oo不仅让我学到了面向对象编程的思想，让我的代码思路更清楚，一切为对象服务、接口封装，一段码该干嘛就干嘛，不用乱加其他功能，同时也提升了我对较大规模代码的整体设计能力以及debug能力。在之前我编写代码时可能想一点写一点，但现在，我会拿出一张纸，好好构思好好设计，思考每个类的功能以及他和其他类的关系，争取让我的设计更优雅，我的代码更清晰。</p>
+<p>​	同时，在第三周和第四周任务量很少的时候，我也老会觉得空唠唠的，可能甚至习惯了前两周的高强度oo时光了吧。所以，已经期待着下一单元了，继续探索，继续战斗，继续痛苦并快乐着！</p>
+<h2 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h2><p>对于第一单元修改的建议，我个人看法有以下两个方面：</p>
+<ol>
+<li>感觉可以修改一下cost机制，有时候很简单的数据过不了cost限制，一些相对复杂的数据又不会被限制（虽然我没仔细研究过cost机制，但在hack别人的时候是这种感受）</li>
+<li>可以调整一下第三单元难度，从第二单元到第三单元落差有点太大了，感觉可以增加一些难度</li>
+</ol>
+<p>这就是我的第一单元总结了，oo第一单元完结，撒花！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Pineapple-F</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/21/oo-Unit1/">http://example.com/2024/03/21/oo-Unit1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons./licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%80%BB%E7%BB%93/">总结</a></div><div class="post_share"><div class="social-share" data-image="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/03/14/OS-lab0/" title="OS-lab0"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">OS-lab0</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/03/14/OS-lab0/" title="OS-lab0"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">OS-lab0</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Pineapple-F</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pineapple-F/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">2.</span> <span class="toc-text">第一次作业</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-number">2.2.</span> <span class="toc-text">基本思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.</span> <span class="toc-text">具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="toc-number">2.4.</span> <span class="toc-text">优化方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bug%E5%88%86%E6%9E%90"><span class="toc-number">2.5.</span> <span class="toc-text">Bug分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">3.</span> <span class="toc-text">第二次作业</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E9%9C%80%E6%B1%82"><span class="toc-number">3.1.</span> <span class="toc-text">新增需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF-1"><span class="toc-number">3.2.</span> <span class="toc-text">基本思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">3.3.</span> <span class="toc-text">具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E5%BC%8F-1"><span class="toc-number">3.4.</span> <span class="toc-text">优化方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bug%E5%88%86%E6%9E%90-1"><span class="toc-number">3.5.</span> <span class="toc-text">Bug分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">4.</span> <span class="toc-text">第三次作业</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E9%9C%80%E6%B1%82-1"><span class="toc-number">4.1.</span> <span class="toc-text">新增需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF-2"><span class="toc-number">4.2.</span> <span class="toc-text">基本思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0-2"><span class="toc-number">4.3.</span> <span class="toc-text">具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E5%BC%8F-2"><span class="toc-number">4.4.</span> <span class="toc-text">优化方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bug%E5%88%86%E6%9E%90-2"><span class="toc-number">4.5.</span> <span class="toc-text">Bug分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">心得体会</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91"><span class="toc-number">6.</span> <span class="toc-text">未来方向</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/21/oo-Unit1/" title="OO第一单元总结">OO第一单元总结</a><time datetime="2024-03-21T11:46:39.000Z" title="Created 2024-03-21 19:46:39">2024-03-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/OS-lab0/" title="OS-lab0">OS-lab0</a><time datetime="2024-03-14T07:00:00.000Z" title="Created 2024-03-14 15:00:00">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/25/OS%E9%A2%84%E4%B9%A0/" title="OS预习">OS预习</a><time datetime="2024-02-25T09:09:02.000Z" title="Created 2024-02-25 17:09:02">2024-02-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/23/%E5%8D%95%E7%89%87%E6%9C%BA%E2%80%94%E2%80%94%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%87%E8%B5%9B/" title="单片机——蓝桥杯备赛">单片机——蓝桥杯备赛</a><time datetime="2024-02-23T13:21:00.667Z" title="Created 2024-02-23 21:21:00">2024-02-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 <i style="color:#f85904;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Pineapple-F</div><div class="footer_custom_text">love crayon</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: '',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: 
+    }, ))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/js/upjiang.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/sakura.js"></script>#樱花<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pineapple-F/Pineapple-F.github.io/css/Lete.css"><script src="https://cdn.jsdelivr.net/gh/Pineapple-F/Pineapple-F.github.io/js/Lete.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
