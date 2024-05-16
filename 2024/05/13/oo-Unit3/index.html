@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="ch" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>oo-Unit3 | Pineapple-F's blog</title><meta name="author" content="Pineapple-F"><meta name="copyright" content="Pineapple-F"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="前言经过了上一单元电梯的折磨，我个人感觉这次的JML相比之下还是比较容易的吧 架构设计容器的选择本次单元作业的绝大多数指令都是通过id来寻找对应的tag，Person还有Meessage。 以Person为例，如果把所有的Person都放在一个List容器里，那么我们每次查找都需要遍历一遍容器，算法复杂度为O(n)，很容易出现TLE。 所以我选择了HashMap作为存储容器，将id作为键值，这样可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oo-Unit3">
+<meta property="og:url" content="http://example.com/2024/05/13/oo-Unit3/index.html">
+<meta property="og:site_name" content="Pineapple-F&#39;s blog">
+<meta property="og:description" content="前言经过了上一单元电梯的折磨，我个人感觉这次的JML相比之下还是比较容易的吧 架构设计容器的选择本次单元作业的绝大多数指令都是通过id来寻找对应的tag，Person还有Meessage。 以Person为例，如果把所有的Person都放在一个List容器里，那么我们每次查找都需要遍历一遍容器，算法复杂度为O(n)，很容易出现TLE。 所以我选择了HashMap作为存储容器，将id作为键值，这样可">
+<meta property="og:locale">
+<meta property="og:image" content="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780">
+<meta property="article:published_time" content="2024-05-13T02:08:05.000Z">
+<meta property="article:modified_time" content="2024-05-16T03:39:25.505Z">
+<meta property="article:author" content="Pineapple-F">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780"><link rel="shortcut icon" href="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780"><link rel="canonical" href="http://example.com/2024/05/13/oo-Unit3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'oo-Unit3',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-16 11:39:25'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.zcool.cn/community/01d00a622aee5811013e8953faed22.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Pineapple-F's blog"><span class="site-name">Pineapple-F's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">oo-Unit3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-05-13T02:08:05.000Z" title="Created 2024-05-13 10:08:05">2024-05-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-05-16T03:39:25.505Z" title="Updated 2024-05-16 11:39:25">2024-05-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="oo-Unit3"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>经过了上一单元电梯的折磨，我个人感觉这次的JML相比之下还是比较容易的吧</p>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="容器的选择"><a href="#容器的选择" class="headerlink" title="容器的选择"></a>容器的选择</h3><p>本次单元作业的绝大多数指令都是通过id来寻找对应的tag，Person还有Meessage。</p>
+<p>以Person为例，如果把所有的Person都放在一个List容器里，那么我们每次查找都需要遍历一遍容器，算法复杂度为O(n)，很容易出现TLE。</p>
+<p>所以我选择了HashMap作为存储容器，将id作为键值，这样可以保证每次查询都能以O(1)的复杂度完成。</p>
+<img src="/image/${fiilename}/image-20240516105328644.png" alt="image-20240516105328644" style="zoom: 50%;" />
+
+<h3 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h3><p>由于本单元的各个方法之间相对独立，所以我就逐个分析一下我优化的方法。</p>
+<h4 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h4><p><img src="/image/$%7Bfiilename%7D/image-20240516110252138.png" alt="image-20240516110252138"></p>
+<p>第一次作业中呢，有三个较为复杂的方法：<code>isCircle</code>，<code>queryBlockSum</code>和<code>queryTripleSum</code>。那首先就单纯看JML我们可以看到<code>queryBlockSum</code>是二重for循环，<code>queryTripleSum</code>是三重for循环。这种O(n^2)及以上的时间复杂度肯定是不行的，所以我们可以通过并查集和随时维护来进行降低时复杂度。</p>
+<h4 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h4><p>首先我的并查集中有三个容器: parent存放每个节点的根节点，rank存放每个节点的秩，graph存放与每个节点直接相连的各节点。然后再通过路径压缩，按秩合并和关系删除来降低这两个方法的时间复杂度。</p>
+<p><img src="/image/$%7Bfiilename%7D/image-20240516105903693.png" alt="image-20240516105903693"></p>
+<p>路径压缩的意思就是我们在找一个元素的根节点的时候，比如这张图我们要找a的根节点，于是a找到b，b找到c，一直找到f，那我们就把这一路上所有节点的根节点都设为f。这样做的目的就是在一个连通分支内所有元素的根节点都是一个元素，这样我们只需要比较两个节点的根节点就可以判断他们是否连通了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">root</span> <span class="operator">=</span> id;</span><br><span class="line">        <span class="keyword">while</span> (root != parent.get(root)) &#123;</span><br><span class="line">            root = parent.get(root);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">now</span> <span class="operator">=</span> id;</span><br><span class="line">        <span class="keyword">while</span> (now != root) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">fa</span> <span class="operator">=</span> parent.get(now);</span><br><span class="line">            parent.put(now, root);</span><br><span class="line">            now = fa;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后是按秩合并，就是说我们要将并查集的两个连通分支连起来的时候，总是将秩较低的树的根指向秩较高的树的根。这样可以一定程度上减短查找路径。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">union</span><span class="params">(<span class="type">int</span> id1, <span class="type">int</span> id2)</span> &#123;</span><br><span class="line">        HashSet&lt;Integer&gt; hashSet1 = graph.get(id1);</span><br><span class="line">        HashSet&lt;Integer&gt; hashSet2 = graph.get(id2);</span><br><span class="line">        hashSet1.add(id2);</span><br><span class="line">        graph.put(id1, hashSet1);</span><br><span class="line">        hashSet2.add(id1);</span><br><span class="line">        graph.put(id2, hashSet2);</span><br><span class="line">        <span class="type">int</span> <span class="variable">root1</span> <span class="operator">=</span> find(id1);</span><br><span class="line">        <span class="type">int</span> <span class="variable">root2</span> <span class="operator">=</span> find(id2);</span><br><span class="line">        <span class="keyword">if</span> (root1 == root2) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        blockCnt--;</span><br><span class="line">        <span class="type">int</span> <span class="variable">rank1</span> <span class="operator">=</span> rank.get(root1);</span><br><span class="line">        <span class="type">int</span> <span class="variable">rank2</span> <span class="operator">=</span> rank.get(root2);</span><br><span class="line">        <span class="keyword">if</span> (rank1 &lt; rank2) &#123;</span><br><span class="line">            parent.put(root1, root2);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (rank1 &gt; rank2) &#123;</span><br><span class="line">            parent.put(root2, root1);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            rank.put(root1, rank1 + <span class="number">1</span>);</span><br><span class="line">            parent.put(root2, root1);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后是关系的删除。比如我们删除AB之间的关系，需要对并查集做一下更新，这时候有两种情况就是删完关系之后AB仍连通或者AB不连通了。那操作方法就是我们先更新一下graph然后对Adfs，把跟A有关系的点的根设为A，秩设为1。这样我们就可以建立一个以A为根节点的联通分支，然后如果这里面有B,那无事发生，我们不需要再操作B了。但如果这里面没有B，那就说明AB不再联通，此时我们就再也B为根节点，重复刚才对A的操作就可以更新完并查集了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">del</span><span class="params">(<span class="type">int</span> id1, <span class="type">int</span> id2)</span> &#123;</span><br><span class="line">        HashSet&lt;Integer&gt; hashSet1 = graph.get(id1);</span><br><span class="line">        HashSet&lt;Integer&gt; hashSet2 = graph.get(id2);</span><br><span class="line">        hashSet1.remove(id2);</span><br><span class="line">        graph.put(id1, hashSet1);</span><br><span class="line">        hashSet2.remove(id1);</span><br><span class="line">        graph.put(id2, hashSet2);</span><br><span class="line">        <span class="type">int</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//dfs 和id1相连根节点全变成id1</span></span><br><span class="line">        HashSet&lt;Integer&gt; set1 = dfs(id1, <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;());</span><br><span class="line">        <span class="keyword">for</span> (Integer id : set1) &#123;</span><br><span class="line">            <span class="keyword">if</span> (id == id2) &#123;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            parent.put(id, id1);</span><br><span class="line">            rank.put(id, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag == <span class="number">0</span>) &#123;</span><br><span class="line">            blockCnt++;</span><br><span class="line">            <span class="comment">//dfs 和id2有关全变成id2</span></span><br><span class="line">            HashSet&lt;Integer&gt; set2 = dfs(id2, <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;());</span><br><span class="line">            <span class="keyword">for</span> (Integer id : set2) &#123;</span><br><span class="line">                parent.put(id, id2);</span><br><span class="line">                rank.put(id, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于<code>queryTripleSum</code>方法，我们在每次增删关系后维护，这样虽然每次维护时的时间复杂度从O(1)变成了O(n)，但是查询时的时间复杂度从O(n^3)变成了O(1)，大大降低了时间复杂度。</p>
+<h4 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h4><p><img src="/image/$%7Bfiilename%7D/image-20240516110235799.png" alt="image-20240516110235799"></p>
+<p>然后第二次作业依然是一些新增了Tag和一些指令，对于复杂度是O(n^2)及以上的一定需要优化。</p>
+<p>这里有一个方法是<code>queryTagValueSum</code>右边是直接按照JML写的方法，他的时间复杂度是O(n^2)，我听说不少同学因为直接就是这么写的，没有维护这个方法然后强测挂了一个点。那左边是每次删改关系时都要维护，乍一看好像是两个都是嵌套for循环，但其实左边这个维护时只是遍历所有的Tag，双重for循环也只是找到所有Tag而已，所以时间复杂度依然是O(n)。</p>
+<p>其他的方法比如<code>queryBestAcquaintance</code>，因为他复杂度是n，所以我没维护他。<code>queryCoupleSum</code>就是每次增删改关系时先调用一下<code>queryBestAcquaintance</code>，然后根据两个人的老couple和新couple通过一些if判断语句来维护<code>coupleSum</code>，可以将复杂度降为O(1)。</p>
+<p>还有这个搜索最短路径就可以直接<code>bfs</code>，广度优先搜索。我是使用双向<code>bfs</code>做了一点优化。</p>
+<h4 id="第三次作业"><a href="#第三次作业" class="headerlink" title="第三次作业"></a>第三次作业</h4><p>然后第三次作业的方法复杂度最多就是O(n)，我个人没有做算法优化。</p>
+<h2 id="测试方案"><a href="#测试方案" class="headerlink" title="测试方案"></a>测试方案</h2><h3 id="黑箱测试"><a href="#黑箱测试" class="headerlink" title="黑箱测试"></a>黑箱测试</h3><p>黑箱测试是指测试应用程序的功能而不是其内部的结构和运作，测试者只需要知道什么是系统该做的事情。意思差不多就是使用数据点或者评测机测试程序，例如中测强测就都是黑箱测试。</p>
+<h3 id="白箱测试"><a href="#白箱测试" class="headerlink" title="白箱测试"></a>白箱测试</h3><p>白箱测试又叫结构测试，测试者需要知道程序的结构和处理算法，按照程序内部逻辑设计测试用例，检测主要执行通路是否都能按预定要求正常工作。我认为就是类似于<code>JUnit</code>实现的单元测试。</p>
+<h3 id="其他测试"><a href="#其他测试" class="headerlink" title="其他测试"></a>其他测试</h3><ul>
+<li><p>单元测试<br>单元测试是指对软件中的最小可测单元进行检查，这里我理解的就是对每个方法进行测试。例如我们在本单元编写的<code>JUnit</code>测试</p>
+</li>
+<li><p>功能测试<br>我理解的功能测试其实就是黑盒测试。我的作业也主要是进行黑盒测试。将数据输入多个程序，比对输出是否一致，进行只关注输入输出是否正确的功能测试。</p>
+</li>
+<li><p>集成测试<br>集成测试是将不同的模块集成为一个整体进行测试。主要测试各模块之间的数据通信。</p>
+</li>
+<li><p>压力测试</p>
+<p>顾名思义，就是对程序提供压力数据，测试程序的性能表现。我在本单元的hw10中进行了压力测试。</p>
+<p>hw10在于同学对拍的时候发现偶尔有些数据我会跑的很慢，经过不断缩小数据范围，排查出基本上是<code>qtvs</code>的问题，然后生成只含<code>ap</code> <code>ar</code>这些初始化指令和<code>qtvs</code>指令的大量数据来进行压力测试，基本确定问题所在。</p>
+</li>
+<li><p>回归测试<br>回归测试是对软件的原来状态重新测试，以确保软件在迭代出新版本之后，仍能符合之前的要求。具体来说，可以拿上次作业的测试程序与测试数据来测这次作业。我没有进行回归测试，感觉没什么必要，上次作业涉及的部分基本上没有功能实现上的改的。</p>
+</li>
+</ul>
+<h3 id="数据构造"><a href="#数据构造" class="headerlink" title="数据构造"></a>数据构造</h3><p>因为有评测机去检测程序的正确性，所以我们手动构造数据时基本就只需要检测程序的性能即可，也就是单个指令的优化做的到不到位。</p>
+<p>我的构造思路大概是这样：</p>
+<ul>
+<li><p>先加很多个人和关系</p>
+</li>
+<li><p>针对要测试的指令复杂度O(n)中的n，尽量增大n</p>
+</li>
+<li><p>再添加要测试的指令达到我们的目的。</p>
+</li>
+</ul>
+<h2 id="性能与Bug"><a href="#性能与Bug" class="headerlink" title="性能与Bug"></a>性能与Bug</h2><p>在性能方面，我是采取能维护就维护的原则，将时间复杂度较高的方法全都进行优化，以避免在强测中出现TLE。</p>
+<p>很幸运，本单元三次作业我在强测和互测中均未出现bug，其实很大程度上也得益于本单元作业的整体架构比较简单，不会像第二单元出现各种奇奇怪怪的bug。</p>
+<p>在写本单元作业前，就听说要做到规格和实现分离，一开始还并不太懂什么意思。但是完成了本单元作业之后，就可以体会到这句话的意思：规格的目的是限定我们的行为，但不固定我们具体的行为，我们并不需要完全按照JML的朴素算法完成要求，而是可以通过各种算法来做到性能优化。</p>
+<h2 id="关于JUnit"><a href="#关于JUnit" class="headerlink" title="关于JUnit"></a>关于JUnit</h2><p>本次作业的<code>JUint</code>在前两次作业也是卡了我很多次，但其实<code>JUnit</code>的编写也是有一点套路：</p>
+<ul>
+<li>首先构造数据点</li>
+<li>然后在每次操作指令完成后，都测试一下</li>
+<li>每次测试就是按照jml逐条验证</li>
+</ul>
+<p>这样的<code>JUint</code>测试就可以很好地检测该方法是否完全符合JML的要求和限定，也是属于白箱测试的优点。</p>
+<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>总的来说，我感觉在第三单元，按照jml编写代码确实让每个方法都变得很清晰，而且整体架构也比前两个单元简单，都是单个方法的算法优化。而且出bug的时候也非常容易确定具体位置，我们主要做的就是优化，维护，降低时间复杂度。</p>
+<p>同时本单元也让我体会到了各种测试，以前只是听过那么多测试方法，但是在这单元的作业中，我也是利用了各种测试，共同保证了程序的正确性。</p>
+<p>对于JML，我个人觉得其实还挺好玩的，在本届JML中可以调用之前的方法，也降低了阅读JML的难度。有了JML，确实可以规范好每个方法的行为，减少了出现错误的概率，让程序更加可靠。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Pineapple-F</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/05/13/oo-Unit3/">http://example.com/2024/05/13/oo-Unit3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons./licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/13/%E7%A0%94%E8%AE%A8%E8%AF%BE/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2024/04/22/OS-lab3/" title="OS-lab3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">OS-lab3</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img.tukuppt.com/png_preview/00/03/43/kaFwVks4Tl.jpg!/fw/780" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Pineapple-F</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pineapple-F/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">架构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">2.1.</span> <span class="toc-text">容器的选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.</span> <span class="toc-text">算法设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">2.2.1.</span> <span class="toc-text">第一次作业</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">2.2.2.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">2.2.3.</span> <span class="toc-text">第二次作业</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">2.2.4.</span> <span class="toc-text">第三次作业</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">测试方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%91%E7%AE%B1%E6%B5%8B%E8%AF%95"><span class="toc-number">3.1.</span> <span class="toc-text">黑箱测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BD%E7%AE%B1%E6%B5%8B%E8%AF%95"><span class="toc-number">3.2.</span> <span class="toc-text">白箱测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95"><span class="toc-number">3.3.</span> <span class="toc-text">其他测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9E%84%E9%80%A0"><span class="toc-number">3.4.</span> <span class="toc-text">数据构造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%B8%8EBug"><span class="toc-number">4.</span> <span class="toc-text">性能与Bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EJUnit"><span class="toc-number">5.</span> <span class="toc-text">关于JUnit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">心得体会</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/%E7%A0%94%E8%AE%A8%E8%AF%BE/" title="Untitled">Untitled</a><time datetime="2024-05-13T02:20:25.011Z" title="Created 2024-05-13 10:20:25">2024-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/oo-Unit3/" title="oo-Unit3">oo-Unit3</a><time datetime="2024-05-13T02:08:05.000Z" title="Created 2024-05-13 10:08:05">2024-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/22/OS-lab3/" title="OS-lab3">OS-lab3</a><time datetime="2024-04-22T07:29:40.000Z" title="Created 2024-04-22 15:29:40">2024-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/20/oo-Unit2/" title="oo-Unit2">oo-Unit2</a><time datetime="2024-04-20T06:22:00.000Z" title="Created 2024-04-20 14:22:00">2024-04-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/08/OS-lab2/" title="OS-lab2">OS-lab2</a><time datetime="2024-04-08T01:47:53.000Z" title="Created 2024-04-08 09:47:53">2024-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 <i style="color:#f85904;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Pineapple-F</div><div class="footer_custom_text">love crayon</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: '',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: 
+    }, ))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/js/upjiang.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/sakura.js"></script>#樱花<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pineapple-F/Pineapple-F.github.io/css/Lete.css"><script src="https://cdn.jsdelivr.net/gh/Pineapple-F/Pineapple-F.github.io/js/Lete.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
